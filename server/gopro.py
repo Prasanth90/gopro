@@ -9,7 +9,7 @@ import re
 
 app = Flask(__name__)
 print("Establishing Connection with the Camera")
-#gopro = GoProCamera.GoPro(constants.gpcontrol)
+gopro = GoProCamera.GoPro(constants.gpcontrol)
 	
 		
 def stream():
@@ -36,6 +36,6 @@ def get_image():
 
 if __name__ == '__main__':
 	print("Starting the Web Server")
-	#_thread.start_new_thread( stream, () )
+	_thread.start_new_thread( stream, () )
 	app.run()
 	print("Stopped")
