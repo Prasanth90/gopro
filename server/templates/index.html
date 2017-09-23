@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<h2>GO PRO - Orders vs Screenshots</h2>
+
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>Image URL</th>
+  </tr>
+  
+  {% for item in items %}
+	  <tr>
+		<td>{{item['order_id']}}</td>
+		<td>
+			<a href="{{item['image_url']}}">{{item['image_url']}}</a>
+		</td>
+	  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>

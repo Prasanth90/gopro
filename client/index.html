@@ -35,38 +35,23 @@
 	<div>
 		<label style="margin: 150px 10px 30px 40px; for="other">ORDER ID</label>
 		<input id="orderid" style="margin: 150px 5px 30px 0px; width: 150px;" type="text" name="order"><br>
-		<button style="margin: 10px 20px 30px 40px; width: 250px;" id="screenshot" onclick="vxgplayer('vxg_media_player1').takescreenshot(); saveScreenShot();">Capture
+		<button style="margin: 10px 20px 30px 40px; width: 250px;" id="screenshot" onclick="saveScreenShot();">Capture
 		</button>
-		<img id="imageid" style="visibility: hidden;" src="filesystem:http://10.5.5.101:8080/temporary/snapshot.jpg">
 	</div>
 
 	<script>
 
 		function saveScreenShot() {
-			d = new Date();
 			var orderId = document.getElementById("orderid").value;
-			$('#imageid').attr('src', 'filesystem:http://10.5.5.101:8080/temporary/snapshot.jpg?'+d.getTime());
-			var base64 = getBase64Image(document.getElementById("imageid"));
 			$.ajax({
 			  type: "POST",
 			  url: "http://127.0.0.1:5000/screenshot",
 			  data:{
-			    imageBase64: base64,
 			    orderid: orderId
 			  }
 			}).done(function() {
 			  console.log('sent');
 			});
-		}
-
-		function getBase64Image(img) {
-		  var canvas = document.createElement("canvas");
-		  canvas.width = img.width;
-		  canvas.height = img.height;
-		  var ctx = canvas.getContext("2d");
-		  ctx.drawImage(img, 0, 0);
-		  var dataURL = canvas.toDataURL("image/jpg");
-		  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 		}
 
 	</script>
