@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GO Pro Live Feed</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/2-col-portfolio.css" rel="stylesheet">
+	<script type="text/javascript" src="vxgplayer-1.8.31.js"></script>
+	<link href="vxgplayer-1.8.31.min.css" rel="stylesheet"/>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">GoPro</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading -->
+      <h1 class="my-4">GoPro HERO4 Session
+        <small>Live Feed</small>
+      </h1>
+
+      <div class="row">
+        <div class="col-lg-6 portfolio-item">
+          <div class="card h-100">
+            <div class="vxgplayer" style="float: left;"
+				id="vxg_media_player1" 
+				url="udp://127.0.0.1:1000"
+				nmf-src="pnacl/Release/media_player.nmf"
+				nmf-path="media_player.nmf"
+				width="520"
+				height="400" 
+				auto-reconnect
+				mute 
+				autostart
+				controls 
+				avsync 
+			></div>
+          </div>
+        </div>
+        <div class="col-lg-6 portfolio-item">
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Screen Capture</a>
+              </h4>
+              <p class="card-text">Capture a high resolution image from the live feed. The captured images can found <a href="http://127.0.0.1:5000/images">here</a></p>
+			  
+			   <form>
+					<div class="form-group">
+						<span class="label label-primary">Order ID</span>
+						<input id="orderid" type="text" class="form-control" id="usr">
+					</div>
+			   </form>
+			   <button onclick="saveScreenShot();" type="button" class="btn btn-info">Capture</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; No Copyrights</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script>
+
+		function saveScreenShot() {
+			var orderId = document.getElementById("orderid").value;
+			$.ajax({
+			  type: "POST",
+			  url: "http://127.0.0.1:5000/screenshot",
+			  data:{
+			    orderid: orderId
+			  }
+			}).done(function() {
+			  console.log('sent');
+			});
+		}
+
+	</script>
+
+  </body>
+
+</html>

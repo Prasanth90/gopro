@@ -39,7 +39,7 @@ def show_images():
 def take_screenshot():
 	order_id = request.values['orderid']
 	gpcam = GoProCamera.GoPro(constants.gpcontrol)
-	image_url = gpcam.take_photo(5)
+	image_url = gpcam.take_photo()
 	save_to_database(order_id, image_url)
 	return ''
 
