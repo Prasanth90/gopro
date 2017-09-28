@@ -72,7 +72,7 @@
 						<input id="orderid" type="text" class="form-control" id="usr">
 					</div>
 			   </form>
-			   <button onclick="saveScreenShot();" type="button" class="btn btn-info">Capture</button>
+			   <button id="capture_btn" onclick="saveScreenShot();" type="button" class="btn btn-info">Capture</button>
             </div>
           </div>
         </div>
@@ -98,9 +98,12 @@
 
 		function saveScreenShot() {
 			var orderId = document.getElementById("orderid").value;
+			$("#capture_btn").attr('disabled','disabled');
+			$("#capture_btn").html('Capturing...');
 			$.ajax({
 			  type: "POST",
 			  url: "http://127.0.0.1:5000/screenshot",
+			  success : handleData,
 			  data:{
 			    orderid: orderId
 			  }
@@ -108,7 +111,11 @@
 			  console.log('sent');
 			});
 		}
-
+		
+		function handleData() {
+			$("#capture_btn").removeAttr('disabled');
+			$("#capture_btn").html('Capture');
+		}
 	</script>
 
   </body>
